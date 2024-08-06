@@ -1,0 +1,15 @@
+{{ if and .IsPage .Params.pager }}
+  {{ $pages := .Parent.RegularPages.ByWeight }}
+  <ul class="pager">
+    {{ with $pages.Next . }}
+      <li class="pager__previous">
+        <a href="{{ .Permalink }}">← {{ .LinkTitle }}</a>
+      </li>
+    {{ end }}
+    {{ with $pages.Prev . }}
+      <li class="pager__next">
+        <a href="{{ .Permalink }}">{{ .LinkTitle }} →</a>
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}

@@ -1,0 +1,73 @@
+html {
+  font-size: 18px;
+  font-family: sans-serif;
+}
+
+// page
+
+.page {
+  display: grid;
+  grid-template-columns: 300px auto 300px;
+  gap: 3rem;
+  padding: 1rem 2rem;
+}
+
+// menu
+
+.menu {
+  padding-left: 0;
+  list-style-type: none;
+  line-height: 1.1;
+  ul {
+    padding-left: 1rem;
+  }
+  li {
+    margin: 0.5rem 0;
+  }
+  a {
+    color: blue;
+    text-decoration: none;
+    &.active {
+      color: red;
+    }
+  }
+}
+
+// toggle
+
+.toggle__input[type=checkbox] {
+  display: none;
+}
+.toggle__label::after {
+  cursor: pointer;
+  content: "[+]";
+  font-family: monospace;
+  color: gray;
+}
+.toggle__input:checked ~ .toggle__label::after {
+  content: "[-]";
+}
+.toggle__input ~ .toggle__target {
+  display: none;
+}
+.toggle__input:checked ~ .toggle__target {
+  display: block;
+}
+
+// breadcrumb, pager
+
+.breadcrumb, .pager {
+  padding-left: 0;
+  list-style-type: none;
+  li {
+    display: inline;
+    color: gray;
+    &:not(:last-child)::after {
+      content: "|";
+    }
+  }
+  a {
+    color: blue;
+    text-decoration: none;
+  }
+}

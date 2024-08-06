@@ -1,0 +1,10 @@
+{{ if .Params.pageTOC }}
+  {{ if gt (.Fragments.Headings | len) 0 }}
+    <div class="page-toc">
+      <h4>
+        On this page
+      </h4>
+      {{ replace .TableOfContents `id="TableOfContents"` `class="menu"` | safeHTML }}
+    </div>
+  {{ end}}
+{{ end}}

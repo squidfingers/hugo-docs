@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <div class="page">
+    {{ partial "components/filetree" . }}
+    <div class="page__body">
+      {{ partial "components/breadcrumb" . }}
+      <h1>
+        {{ .Title }}
+      </h1>
+      {{ with .Content }}{{ . }}{{ else }}<p><em>Content</em></p>{{ end }}
+      {{ partial "components/pager" . }}
+    </div>
+    {{ partial "components/page-toc" . }}
+  </div>
+{{ end }}

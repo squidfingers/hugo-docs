@@ -1,0 +1,29 @@
+{{/* This will resursively show all pages under the current top-level section */}}
+{{/* If you want to show all sections in the content directory, use `$top := site.GetPage "/"` */}}
+{{ $top := .FirstSection }}
+
+<nav class="filetree">
+  {{ with $top }}
+    {{ template "filetree" (dict "Section" . "CurrentPage" $) }}
+  {{ end }}
+</nav>
+
+{{ define "filetree" }}
+  <ul class="menu {{ with .class }}{{ . }}{{ end }}">
+    {{ range .Section.Pages }}
+      {{ $isCurrentPage := eq . $.CurrentPage }}
+      <li>
+        <a href="{{ .RelPermalink }}" class="{{ if $isCurrentPage }}active{{ end }}">
+          {{ .LinkTitle }}
+        </a>
+        {{ if .IsSection }}
+          {{ $isAncestorOfCurrentPage := .IsAncestor $.CurrentPage }}
+          {{ $showSection := or $isAncestorOfCurrentPage $isCurrentPage }}
+          <input class="toggle__input" type="checkbox" id="toggle-{{ .File.UniqueID }}" {{ if $showSection }}checked="checked"{{ end }}>
+          <label class="toggle__label" for="toggle-{{ .File.UniqueID }}"></label>
+          {{ template "filetree" (dict "Section" . "CurrentPage" $.CurrentPage "class" "toggle__target") }}
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}

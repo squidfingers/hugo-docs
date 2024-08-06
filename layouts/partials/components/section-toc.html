@@ -1,0 +1,24 @@
+{{ if and .IsSection .Params.sectionTOC }}
+  <div class="section-toc">
+    <h2>
+      In this section
+    </h2>
+    {{/* Resursively show all pages in this section */}}
+    {{ template "section-toc" (dict "Section" .) }}
+  </div>
+{{ end }}
+
+{{ define "section-toc" }}
+  <ul class="menu">
+    {{ range .Section.Pages }}
+      <li>
+        <a href="{{ .RelPermalink }}">
+          {{ .LinkTitle }}
+        </a>
+        {{ if .IsSection }}
+          {{ template "section-toc" (dict "Section" .) }}
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}

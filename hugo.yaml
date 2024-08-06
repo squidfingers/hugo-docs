@@ -1,0 +1,3 @@
+title: Hugo Docs
+disableKinds: ["taxonomy", "term", "RSS", "sitemap", "robotsTXT"]
+ignoreLogs: ["warning-frontmatter-params-overrides"]

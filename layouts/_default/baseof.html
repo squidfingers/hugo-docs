@@ -5,9 +5,12 @@
     <title>{{ site.Title }}</title>
     {{ block "head" . }}
     {{ end }}
-    {{ $cssOpts := dict "transpiler" "libsass" "targetPath" "css/main.css" }}
-    {{ with resources.Get "scss/main.scss" | toCSS $cssOpts | resources.Minify | resources.Fingerprint }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}">
+    {{ with resources.Get "scss/main.scss" }}
+      {{ $css := . | toCSS (dict "transpiler" "libsass" "targetPath" "css/main.css") }}
+      {{ if hugo.IsProduction }}
+        {{ $css = $css | minify | fingerprint }}
+      {{ end }}
+      <link rel="stylesheet" href="{{ $css.RelPermalink }}">
     {{ end }}
   </head>
   <body>

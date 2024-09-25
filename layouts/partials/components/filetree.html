@@ -16,7 +16,7 @@
         <a href="{{ .RelPermalink }}" class="{{ if $isCurrentPage }}active{{ end }}">
           {{ .LinkTitle }}
         </a>
-        {{ if .IsSection }}
+        {{ if and .IsSection .RegularPages }}
           {{ $isAncestorOfCurrentPage := .IsAncestor $.CurrentPage }}
           {{ $showSection := or $isAncestorOfCurrentPage $isCurrentPage }}
           <input class="toggle__input" type="checkbox" id="toggle-{{ .File.UniqueID }}" {{ if $showSection }}checked="checked"{{ end }}>

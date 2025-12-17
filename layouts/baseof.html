@@ -6,7 +6,7 @@
     {{ block "head" . }}
     {{ end }}
     {{ with resources.Get "scss/main.scss" }}
-      {{ $css := . | toCSS (dict "transpiler" "libsass" "targetPath" "css/main.css") }}
+      {{ $css := . | toCSS (dict "transpiler" "dartsass" "targetPath" "css/main.css") }}
       {{ if hugo.IsProduction }}
         {{ $css = $css | minify | fingerprint }}
       {{ end }}
